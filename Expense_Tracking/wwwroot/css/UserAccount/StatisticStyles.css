@@ -1,0 +1,141 @@
+﻿.boldLabel {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.dropDownCreated {
+    padding-left: 400px;
+    margin-top: 0;
+    width: 55%;
+}
+
+.inputCreated {
+    padding-left: 400px;
+    margin-top: 45px;
+    width: 55%;
+}
+
+.boldLabelSecond {
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+}
+
+.filterInput {
+    width: 47%;
+    display: inline;
+}
+
+.filterSpan {
+    width: 47%;
+    display: inline-block;
+    position: fixed;
+}
+
+.filterSpanSecond {
+    left: 38%;
+    width: 47%;
+    display: inline-block;
+    position: fixed;
+}
+
+.checkDiv {
+    margin-left: 400px;
+    margin-top: 45px;
+    position: fixed;
+}
+
+.checkDivSecond {
+    padding-top: 15px;
+}
+
+.checkStyle {
+    display: inline-block;
+    width: 230px;
+}
+
+.checkStyleSecond {
+    display: inline-block;
+}
+
+.expenseValues {
+    margin-left: 400px;
+    margin-top: 430px;
+    position: absolute;
+    width: 500px;
+}
+
+.item {
+    display: inline;
+}
+
+.labelFantasy1 {
+    height: 58px;
+    font-family: Impact, fantasy;
+    text-shadow: black 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px 0px, black -1px -1px, black 0px -1px, black 1px -1px;
+    font-weight: 600;
+    color: #f1566f;
+    font-size: 28px;
+}
+
+.labelFantasy2 {
+    height: 58px;
+    font-family: Impact, fantasy;
+    text-shadow: black 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px 0px, black -1px -1px, black 0px -1px, black 1px -1px;
+    font-weight: 600;
+    color: #ff9650;
+    font-size: 28px;
+}
+
+.labelFantasy3 {
+    height: 58px;
+    font-family: Impact, fantasy;
+    text-shadow: black 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px 0px, black -1px -1px, black 0px -1px, black 1px -1px;
+    font-weight: 600;
+    color: #fae250;
+    font-size: 28px;
+}
+
+.labelFantasy4 {
+    height: 58px;
+    font-family: Impact, fantasy;
+    text-shadow: black 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px 0px, black -1px -1px, black 0px -1px, black 1px -1px;
+    font-weight: 600;
+    color: #00bb6d;
+    font-size: 28px;
+}
+
+.labelFantasy5 {
+    height: 58px;
+    font-family: Impact, fantasy;
+    text-shadow: black 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px 0px, black -1px -1px, black 0px -1px, black 1px -1px;
+    font-weight: 600;
+    color: #1b6ac6;
+    font-size: 28px;
+}
+
+.labelFantasy6 {
+    height: 58px;
+    font-family: Impact, fantasy;
+    text-shadow: black 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px 0px, black -1px -1px, black 0px -1px, black 1px -1px;
+    font-weight: 600;
+    color: #8b00ff;
+    font-size: 28px;
+}
+
+.items span {
+    font-family: Impact, fantasy;
+    font-size: 28px;
+    padding-left: 20px;
+}
+
+.sumValue {
+    margin-left: 1050px;
+    margin-top: 630px;
+    position: fixed;
+}
+
+.halfBoldLabel {
+    font-size: 24px;
+    font-weight: 400;
+}

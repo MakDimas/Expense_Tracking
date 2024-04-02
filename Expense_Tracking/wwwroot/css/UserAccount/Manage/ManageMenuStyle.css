@@ -1,0 +1,530 @@
+﻿body {
+    background: #EEE;
+    overflow: hidden;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.container {
+    position: relative;
+    padding: 50px 0;
+    margin: 0px, auto;
+    clear: both;
+}
+
+@media only screen and (min-width: 1200px) {
+    .container {
+        width: 1210px;
+    }
+}
+
+@media only screen and (min-width: 960px) and (max-width: 1199px) {
+    .container {
+        width: 1030px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+    .container {
+        width: 682px;
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .container {
+        width: 428px;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    .container {
+        width: 320px;
+        margin: 0 auto;
+    }
+}
+
+
+.mcd-menu-top {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: #565656;
+    height: 73px;
+    width: 1497px;
+}
+
+    .mcd-menu-top li {
+        float: left;
+        position: relative;
+        width: 374.25px;
+    }
+
+        .mcd-menu-top li a {
+            display: block;
+            text-decoration: none;
+            padding: 7.5px 20px;
+            text-align: center;
+            color: white;
+            border-right: 1px solid #E7E7E7;
+        }
+
+            .mcd-menu-top li a i {
+                display: block;
+                font-size: 30px;
+                margin-bottom: 10px;
+            }
+
+            .mcd-menu-top li a strong {
+                display: block;
+                font-size: 20px;
+                text-transform: uppercase;
+            }
+
+            .mcd-menu-top li a small {
+                display: block;
+                font-size: 12px;
+            }
+
+            .mcd-menu-top li a i, .mcd-menu-top li a strong, .mcd-menu-top li a small {
+                position: relative;
+                transition: all 300ms linear;
+            }
+
+        .mcd-menu-top li:hover > a i {
+            opacity: 1;
+            animation: moveFromTop 300ms ease-in-out;
+        }
+
+        .mcd-menu-top li:hover a strong {
+            opacity: 1;
+            animation: moveFromLeft 300ms ease-in-out;
+        }
+
+        .mcd-menu-top li:hover a small {
+            opacity: 1;
+            animation: moveFromRight 300ms ease-in-out;
+        }
+
+        .mcd-menu-top li:hover > a {
+            color: #e67e22;
+        }
+
+        .mcd-menu-top li a.active {
+            position: relative;
+            color: #e67e22;
+            border: 0;
+            border-bottom: 4px solid #e67e22;
+            border-top: 4px solid #e67e22;
+            margin-top: -4px;
+            box-shadow: 0 0 5px #DDD;
+        }
+
+            .mcd-menu-top li a.active:before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                border-bottom: 5px solid #e67e22;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+            }
+
+@-webkit-keyframes moveFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(200%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
+@-webkit-keyframes moveFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(200%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+@-webkit-keyframes moveFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(-200%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+
+
+.mcd-menu-top li ul,
+.mcd-menu-top li ul li ul {
+    position: absolute;
+    height: 73px;
+    min-width: 200px;
+    padding: 0;
+    margin: 0;
+    background: #565656;
+    border-top: 4px solid #e67e22;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 300ms linear;
+    top: 130px;
+    z-index: 1000;
+}
+
+    .mcd-menu-top li ul:before {
+        content: "";
+        position: absolute;
+        top: -8px;
+        left: 23%;
+        border-bottom: 5px solid #e67e22;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+    }
+
+    .mcd-menu-top li:hover > ul,
+    .mcd-menu-top li ul li:hover > ul {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        top: 100px;
+    }
+
+    .mcd-menu-top li ul li {
+        float: none;
+    }
+
+        .mcd-menu-top li ul li a {
+            padding: 10px;
+            text-align: left;
+            border: 0;
+            border-bottom: 1px solid #EEE;
+        }
+
+            .mcd-menu-top li ul li a i {
+                font-size: 16px;
+                display: inline-block;
+                margin: 0 10px 0 0;
+            }
+
+        .mcd-menu-top li ul li ul {
+            left: 230px;
+            top: 0;
+            border: 0;
+            border-left: 4px solid #e67e22;
+        }
+
+            .mcd-menu-top li ul li ul:before {
+                content: "";
+                position: absolute;
+                top: 15px;
+                left: -14px;
+                border-right: 5px solid #e67e22;
+                border-bottom: 5px solid transparent;
+                border-top: 5px solid transparent;
+            }
+
+        .mcd-menu-top li ul li:hover > ul {
+            top: 0px;
+            left: 200px;
+        }
+
+
+
+.mcd-menu-top li.float {
+    float: right;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+    .mcd-menu-top {
+        height: 85px;
+    }
+
+        .mcd-menu-top li a {
+            padding: 12px;
+        }
+
+            .mcd-menu-top li a i {
+                font-size: 22px;
+            }
+
+            .mcd-menu-top li a strong {
+                font-size: 12px;
+            }
+
+            .mcd-menu-top li a small {
+                font-size: 10px;
+            }
+
+    .mcd-menu-top li:hover > ul {
+        top: 85px;
+        min-width: 180px;
+    }
+
+    .mcd-menu-top li ul li > ul {
+        min-width: 150px;
+        left: 200px;
+        top: 0;
+    }
+
+    .mcd-menu-top li ul li:hover > ul {
+        min-width: 150px;
+        left: 180px;
+        top: 0;
+    }
+
+    .mcd-menu-top li ul li ul li ul {
+        min-width: 150px;
+        left: 25px !important;
+        top: 54px;
+        border: 0;
+        border-top: 3px solid #e67e22;
+    }
+
+    .mcd-menu-top li ul li ul li:hover ul {
+        top: 35px;
+    }
+
+    .mcd-menu-top li ul li ul li ul:before {
+        border: 0;
+        border-bottom: 5px solid #e67e22;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        left: 10%;
+        top: -8px;
+    }
+
+    .mcd-menu-top li:hover ul a {
+        font-size: 12px;
+    }
+
+        .mcd-menu-top li:hover ul a i {
+            font-size: 14px;
+        }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .mcd-menu-top {
+        height: 42px;
+        position: relative;
+    }
+
+        .mcd-menu-top li a {
+            padding: 12px 17.7px;
+        }
+
+            .mcd-menu-top li a i {
+                margin: 0;
+                font-size: 18px;
+            }
+
+        .mcd-menu-top li {
+            position: static;
+        }
+
+            .mcd-menu-top li ul {
+                min-width: 100%;
+                left: 0;
+                top: 50px;
+            }
+
+            .mcd-menu-top li:hover > ul {
+                top: 42px;
+            }
+
+            .mcd-menu-top li > ul:before {
+                border: 0;
+            }
+
+            .mcd-menu-top li ul > li {
+                position: relative;
+            }
+
+            .mcd-menu-top li ul li:hover > ul {
+                left: 34px;
+            }
+
+            .mcd-menu-top li a {
+                position: relative;
+                font-size: 12px;
+            }
+
+                .mcd-menu-top li a:hover strong, .mcd-menu-top li a.active strong {
+                    display: block;
+                    font-size: 10px;
+                    padding: 3px 0;
+                    position: absolute;
+                    top: -20px;
+                    left: 0;
+                    background: #e67e22;
+                    color: #565656;
+                    min-width: 100%;
+                    text-transform: lowercase;
+                    font-weight: normal;
+                }
+
+                .mcd-menu-top li a.active:before {
+                    left: 40%;
+                }
+
+    .mcd-menu-top li ul li > ul {
+        min-width: 200px;
+        left: 200px;
+    }
+
+    .mcd-menu-top li ul li:hover ul {
+        left: 180px;
+    }
+
+    .mcd-menu-top li ul li ul:before {
+        left: -9px;
+    }
+
+    .mcd-menu-top li ul li ul li ul {
+        min-width: 200px;
+        border: 0;
+        border-top: 3px solid #e67e22;
+        left: 25px !important;
+        top: 45px;
+    }
+
+    .mcd-menu-top li ul li ul li:hover ul {
+        top: 40px;
+    }
+
+    .mcd-menu-top li ul li ul li ul:before {
+        border: 0;
+        border-bottom: 5px solid #e67e22;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        left: 10%;
+        top: -8px;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    .mcd-menu-top {
+        height: 42px;
+        position: relative;
+    }
+
+        .mcd-menu-top li a strong, .mcd-menu-top li a small, .mcd-menu-top li a.search {
+            display: none;
+        }
+
+        .mcd-menu-top li a {
+            padding: 12px 13.8px;
+            font-size: 12px;
+        }
+
+            .mcd-menu-top li a i {
+                margin: 0;
+                font-size: 18px;
+            }
+
+        .mcd-menu-top li {
+            position: static;
+        }
+
+            .mcd-menu-top li ul {
+                min-width: 100%;
+                left: 0;
+                top: 50px;
+            }
+
+            .mcd-menu-top li:hover > ul {
+                top: 42px;
+            }
+
+            .mcd-menu-top li > ul:before {
+                border: 0;
+            }
+
+            .mcd-menu-top li ul > li {
+                position: relative;
+            }
+
+            .mcd-menu-top li ul li:hover > ul {
+                left: 34px;
+            }
+
+            .mcd-menu-top li a {
+                position: relative;
+            }
+
+                .mcd-menu-top li a:hover strong, .mcd-menu-top li a.active strong {
+                    display: block;
+                    font-size: 10px;
+                    padding: 3px 0;
+                    position: absolute;
+                    top: -20px;
+                    left: 0;
+                    background: #e67e22;
+                    color: #565656;
+                    min-width: 100%;
+                    text-transform: lowercase;
+                    font-weight: normal;
+                }
+
+                .mcd-menu-top li a.active:before {
+                    left: 40%;
+                }
+
+            .mcd-menu-top li ul li > ul {
+                min-width: 150px;
+                left: 160px;
+            }
+
+            .mcd-menu-top li ul li:hover ul {
+                left: 120px;
+            }
+
+            .mcd-menu-top li ul li ul:before {
+                left: -9px;
+            }
+
+            .mcd-menu-top li ul li ul li ul {
+                min-width: 160px;
+                left: 25px !important;
+                top: 39px;
+                border: 0;
+                border-top: 3px solid #e67e22;
+            }
+
+            .mcd-menu-top li ul li ul li:hover ul {
+                top: 39px;
+            }
+
+            .mcd-menu-top li ul li ul li ul:before {
+                border: 0;
+                border-bottom: 5px solid #e67e22;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                left: 10%;
+                top: -8px;
+            }
+}

@@ -1,0 +1,39 @@
+﻿@using Expense_Tracking.Areas.Identity.Pages.Account.Manage
+
+<link rel="stylesheet" href="~/css/UserAccount/Manage/ManageMenuStyle.css"/>
+
+@* Верхнее меню в настройках аккаунта *@
+<div class="container" style="bottom: 967.5px; margin-left: 374.5px;">
+	<nav>
+		<ul class="mcd-menu-top">
+			<li>
+				<a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">
+					<i class="fa fa-home"></i>
+					<strong>Profile</strong>
+					<small>email & password</small>
+				</a>
+			</li>
+			<li>
+				<a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">
+					<i class="fa fa-edit"></i>
+					<strong>Email</strong>
+					<small>change email</small>
+				</a>
+			</li>
+			<li>
+				<a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">
+					<i class="fa fa-gift"></i>
+					<strong>Password</strong>
+					<small>change password</small>
+				</a>
+			</li>
+			<li>
+				<a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">
+					<i class="fa fa-globe"></i>
+					<strong>Personal data</strong>
+					<small>change account data</small>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</div>

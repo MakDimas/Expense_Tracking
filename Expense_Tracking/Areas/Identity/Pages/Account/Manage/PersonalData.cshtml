@@ -1,0 +1,42 @@
+﻿@page
+@using Expense_Tracking.Domain.Entity
+@using Expense_Tracking.Service.Interfaces
+@inject IUserService _user
+@model PersonalDataModel
+
+@{
+    ViewData["Title"] = "Personal Data";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+
+    var currentName = _user.GetCurrentUser().Result?.Name;
+    var currentSurname = _user.GetCurrentUser().Result?.Surname;
+    var currentLimit = _user.GetCurrentUser().Result?.DayLimit;
+}
+
+<div class="container" style="margin-top: 270px; margin-left: 300px; max-width: 600px">
+    <h3 class="text-center">Change your account data</h3>
+    <partial name="_StatusMessage" for="StatusMessage" />
+
+    <form id="personal-data-form" method="post">
+        <div class="form-floating">
+            <input asp-for="Input.Name" class="form-control" autocomplete="current-password" aria-required="true" value="@currentName" />
+            <label asp-for="Input.Name" class="form-label" style="z-index: 0"></label>
+            <span asp-validation-for="Input.Name" class="text-danger"></span>
+        </div>
+        <div class="form-floating">
+            <input asp-for="Input.Surname" class="form-control" autocomplete="current-password" aria-required="true" value="@currentSurname" />
+            <label asp-for="Input.Surname" class="form-label" style="z-index: 0"></label>
+            <span asp-validation-for="Input.Surname" class="text-danger"></span>
+        </div>
+        <div class="form-floating">
+            <input asp-for="Input.DayLimit" class="form-control" autocomplete="current-password" aria-required="true" value="@currentLimit" />
+            <label asp-for="Input.DayLimit" class="form-label" style="z-index: 0"></label>
+            <span asp-validation-for="Input.DayLimit" class="text-danger"></span>
+        </div>
+        <button type="submit" class="w-100 btn btn-lg btn-primary">Update</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

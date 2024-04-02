@@ -1,0 +1,25 @@
+﻿svg {
+    width: 100%;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes reverseRotate {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+#gear {
+    animation: rotate 5s linear infinite;
+    transform-origin: 47px 47px;
+}
+
+#gear1 {
+    animation: reverseRotate 9.5s linear infinite;
+    transform-origin: 47px 47px;
+}

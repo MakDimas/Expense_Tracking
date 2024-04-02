@@ -1,0 +1,210 @@
+﻿@using Expense_Tracking.Domain.ViewModel.Expense;
+@using Expense_Tracking.Domain.Enum;
+@using Expense_Tracking.Domain.ViewModel._UserAccount
+@using Expense_Tracking.Service.Interfaces;
+@inject IExpenseService _expense;
+@model CreateAndFilterViewModel;
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Statistic";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="~/css/UserAccount/DiagramStyle.css" />
+        <link rel="stylesheet" href="~/css/UserAccount/StatisticStyles.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css" />
+    </head>
+    <body>
+        @* Боковая панель *@
+	    @await Html.PartialAsync("_AsidePartialView", Model.Create)
+
+        <div style="margin-top: -900px">
+            <h1 class="text-center">Your expense statistic</h1>
+
+            @* Основная диаграмма *@
+            @await Html.PartialAsync("_DiagramPartialView", Model)
+
+            @* Фоновая диаграмма *@
+            <div class="diagram" style="--items: 6; margin: 0 1000px; width: 613.594px;">
+                <div class="item" style="--idx: 0; --perc: 1; --clr: #f1566f; --opacity: 0.15"></div>
+                <div class="item" style="--idx: 1; --perc: 1; --clr: #ff9650; --opacity: 0.15"></div>
+                <div class="item" style="--idx: 2; --perc: 1; --clr: #fae250; --opacity: 0.15"></div>
+                <div class="item" style="--idx: 3; --perc: 1; --clr: #00bb6d; --opacity: 0.15"></div>
+                <div class="item" style="--idx: 4; --perc: 1; --clr: #1b6ac6; --opacity: 0.15"></div>
+                <div class="item" style="--idx: 5; --perc: 1; --clr: #8b00ff; --opacity: 0.15"></div>
+            </div>
+
+            @{
+                var dateTime1 = DateTime.Today.Date.AddDays(-1).ToString("yyyyy-MM-dd");
+                var dateTime2 = DateTime.Today.Date.ToString("yyyy-MM-dd");
+            }
+
+            @* Фильтр выпадающего списка*@
+            <div class="dropDownCreated">
+                <label class="boldLabel">Created period:</label>
+                <form id="filterChangeForm" method="post" asp-controller="Account" asp-action="StatisticFilter">
+                    @Html.DropDownList("Filter.Created", Html.GetEnumSelectList<CreatedFilter>(), 
+                        new { @class = "form-control", title = "Custom Expense Type", id = "filterCreated", name = "Filter.Created" })
+                </form>
+            </div>
+
+            @* Фильтр выбора диапазона дат *@
+            <div class="inputCreated">
+                <label class="boldLabelSecond">Created period:</label>
+                <form id="filterRangeForm" method="post" asp-controller="Account" asp-action="StatisticFilter">
+                    <input id="filterDateTime1" name="Filter.DateTime1" class="form-control filterInput" max="@dateTime1" type="date" /> 
+                    - 
+                    <input id="filterDateTime2" name="Filter.DateTime2" class="form-control filterInput" max="@dateTime2" type="date" />
+                </form>
+                <span class="text-danger filterSpan" id="dateFilter1"></span> 
+                <span class="text-danger filterSpanSecond" id="dateFilter2"></span>
+            </div>
+
+            @* Фильтр отображения категорий *@
+            <div class="checkDiv">
+                <label class="boldLabel">Category:</label>
+                <div class="col">
+                    <div class="checkbox icheck-danger checkStyle">
+                        <input type="checkbox" checked id="foodCheck" name="Filter.Check[0]" value="true" />
+                        <label for="foodCheck">Food</label>
+                        <input type="hidden" name="Filter.Check[0]" value="false" />
+                    </div>
+                    <div class="checkbox icheck-carrot checkStyle">
+                        <input type="checkbox" checked id="funCheck" name="Filter.Check[1]" value="true" />
+                        <label for="funCheck">Fun</label>
+                        <input type="hidden" name="Filter.Check[1]" value="false" />
+                    </div>
+                    <div class="checkbox icheck-sunflower checkStyleSecond">
+                        <input type="checkbox" checked id="clothesCheck" name="Filter.Check[2]" value="true" />
+                        <label for="clothesCheck">Clothes</label>
+                        <input type="hidden" name="Filter.Check[2]" value="false" />
+                    </div>
+                </div>
+                <div class="col checkDivSecond">
+                    <div class="checkbox icheck-nephritis checkStyle">
+                        <input type="checkbox" checked id="studyCheck" name="Filter.Check[3]" value="true" />
+                        <label for="studyCheck">Study</label>
+                        <input type="hidden" id="studyCheck" name="Filter.Check[3]" value="false" />
+                    </div>
+                    <div class="checkbox icheck-belizehole checkStyle">
+                        <input type="checkbox" checked id="medicineCheck" name="Filter.Check[4]" value="true" />
+                        <label for="medicineCheck">Medicine</label>
+                        <input type="hidden" name="Filter.Check[4]" value="false" />
+                    </div>
+                    <div class="checkbox icheck-wisteria checkStyleSecond">
+                        <input type="checkbox" checked id="otherCheck" name="Filter.Check[5]" value="true" />
+                        <label for="otherCheck">Other</label>
+                        <input type="hidden" name="Filter.Check[5]" value="false" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* Валидация диапазона дат *@
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var dateTime1Input = document.querySelector('input[name="Filter.DateTime1"]');
+                var dateTime2Input = document.querySelector('input[name="Filter.DateTime2"]');
+                var dangerSpan1 = document.getElementById('dateFilter1');
+                var dangerSpan2 = document.getElementById('dateFilter2');
+
+                dateTime1Input.addEventListener('change', function () {
+                    if (dateTime1Input.value) {
+                        dangerSpan1.textContent = '';
+                    }
+                    if (dateTime2Input.value && dateTime1Input.value > dateTime2Input.value) {
+                        dangerSpan1.textContent = 'Start date can`t be bigger than end date';
+                        dateTime1Input.value = '';
+                    }
+                    else if (dateTime1Input.value == dateTime2Input.value) {
+                        dangerSpan1.textContent = 'Start date can`t be equal end date';
+                        dateTime1Input.value = '';
+                    }
+                });
+
+                dateTime2Input.addEventListener('change', function () {
+                    if (dateTime2Input.value) {
+                        dangerSpan2.textContent = '';
+                    }
+                    if (dateTime2Input.value < dateTime1Input.value) {
+                        dangerSpan2.textContent = 'End date can`t be smaller than start date';
+                        dateTime2Input.value = '';
+                    }
+                    else if (dateTime2Input.value == dateTime1Input.value) {
+                        dangerSpan2.textContent = 'End date can`t be equal start date';
+                        dateTime2Input.value = '';
+                    }
+                });
+            });
+        </script>
+
+        @* Обновление данных после применения фильтра выбора *@
+        <script>
+            $(function () {
+                $('#filterCreated').change(function (e) {
+                    e.preventDefault();
+                    var formData = $('#filterChangeForm').serialize();
+
+                    var dateTime1Input = document.getElementById('filterDateTime1');
+                    var dateTime2Input = document.getElementById('filterDateTime2');
+
+                    var spanTime1Input = document.getElementById('dateFilter1');
+                    var spanTime2Input = document.getElementById('dateFilter2');
+
+                    if (dateTime1Input.value || dateTime2Input.value) {
+                        dateTime1Input.value = '';
+                        dateTime2Input.value = '';
+                    }
+
+                    if(spanTime1Input.textContent != '' || spanTime2Input.textContent != ''){
+                        spanTime1Input.textContent = '';
+                        spanTime2Input.textContent = '';
+                    }
+
+                    $.ajax({
+                        type: 'POST',
+                        url: $('#filterChangeForm').attr('action'),
+                        data: formData,
+                        success: function (response) {
+                            $('#diagramTwoUpdate .diagram').html($(response).find('.diagram').html());
+                            $('#expenseValue .row').html($(response).find('.row').html());
+                            $('#sumPeriodValue .sumValue').html($(response).find('.sumValue').html());
+                        }
+                    });
+                });
+            });
+        </script>
+
+        @* Обновление данных после применения фильтра диапазона *@
+        <script>
+            $(function() {
+                    $('#filterDateTime1, #filterDateTime2').change(function (e) {
+                    e.preventDefault();
+                    var filterDateTime1Value = $('#filterDateTime1').val();
+                    var filterDateTime2Value = $('#filterDateTime2').val();
+
+                    if (filterDateTime1Value && filterDateTime2Value) {
+                        var formData = $('#filterRangeForm').serialize();
+                        var filterCreated = document.getElementById('filterCreated');
+                        filterCreated.value = 0;
+
+                        $.ajax({
+                            type: 'POST',
+                            url: $('#filterRangeForm').attr('action'),
+                            data: formData,
+                            success: function (response) {
+
+                                $('#diagramTwoUpdate .diagram').html($(response).find('.diagram').html());
+                                $('#expenseValue .row').html($(response).find('.row').html());
+                                $('#sumPeriodValue .sumValue').html($(response).find('.sumValue').html());
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

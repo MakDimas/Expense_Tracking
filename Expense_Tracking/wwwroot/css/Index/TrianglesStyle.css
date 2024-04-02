@@ -1,0 +1,605 @@
+﻿.trg-1 {
+    /* Треугольник 1 */
+    position: absolute;
+    width: 530px;
+    height: 230px;
+    left: 15%;
+    top: 1346px;
+    right: auto;
+    bottom: 0;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background-color: #00B4C7;
+    transform: rotate(180deg);
+    box-shadow: 2px, 0, 10px, black;
+}
+
+.animate-up-1 {
+    animation: slideUp1 1s ease forwards;
+}
+
+@keyframes slideUp1 {
+    from {
+        top: 1326px;
+    }
+    to {
+        top: 690px;
+    }
+}
+
+.trg-2 {
+    /* Треугольник 2 */
+    position: absolute;
+    width: 610px;
+    height: 300px;
+    left: 30%;
+    right: auto;
+    top: 613px;
+    bottom: auto;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background-color: #D80003;
+    transform: rotate(180deg);
+}
+
+.animate-up-2 {
+    animation: slideUp2 1s ease forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes slideUp2 {
+    from {
+        top: 1186px;
+    }
+    to {
+        top: 620px;
+    }
+}
+
+.trg-3 {
+    /* Треугольник 3 */
+    position: absolute;
+    width: 530px;
+    height: 230px;
+    left: 45%;
+    right: auto;
+    top: 683px;
+    bottom: auto;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background-color: #A74582;
+    transform: rotate(180deg);
+    z-index: 2;
+}
+
+.animate-up-3 {
+    animation: slideUp3 1s ease forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes slideUp3 {
+    from {
+        top: 1326px;
+    }
+
+    to {
+        top: 690px;
+    }
+}
+
+.trg-4 {
+    /* Треугольник 4 */
+    position: absolute;
+    width: 460px;
+    height: 210px;
+    left: 58%;
+    top: 703px;
+    bottom: auto;
+    right: auto;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    z-index: -1;
+    background-color: #7EC401;
+    transform: rotate(180deg);
+}
+
+.animate-up-4 {
+    animation: slideUp4 1s ease forwards;
+    animation-delay: 0.4s;
+}
+
+@keyframes slideUp4 {
+    from {
+        top: 1366px;
+    }
+
+    to {
+        top: 710px;
+    }
+}
+
+.trg-5 {
+    /* Треугольник 5 */
+    position: absolute;
+    width: 640px;
+    height: 410px;
+    left: auto;
+    right: -31.2%;
+    top: 450px;
+    bottom: auto;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background-color: #006498;
+    transform: rotate(90deg);
+    z-index: -1;
+    transition: left .2s linear;
+}
+
+.animate-up-5 {
+    animation: slideUp5 1s ease forwards;
+    animation-delay: 0.7s;
+}
+
+@keyframes slideUp5 {
+    from {
+        right: -61.4%;
+    }
+
+    to {
+        right: -31.2%;
+    }
+}
+
+.trg-6 {
+    /* Треугольник 6 */
+    position: absolute;
+    width: 640px;
+    height: 400px;
+    left: auto;
+    right: -31.5%;
+    top: 360px;
+    bottom: auto;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform: rotate(90deg);
+    background-color: #9A00C0;
+    z-index: -1;
+}
+
+.animate-up-6 {
+    animation: slideUp6 1s ease forwards;
+    animation-delay: 0.9s;
+}
+
+@keyframes slideUp6 {
+    from {
+        right: -63%;
+    }
+
+    to {
+        right: -31.5%;
+    }
+}
+
+.trg-7 {
+    /* Треугольник 7 */
+    position: absolute;
+    width: 360px;
+    height: 250px;
+    left: auto;
+    right: -26.5%;
+    top: 430px;
+    bottom: auto;
+    z-index: 2;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform: rotate(90deg);
+    background-color: #D86C00;
+    z-index: 2;
+}
+
+.animate-up-7 {
+    animation: slideUp7 1s ease forwards;
+    animation-delay: 1.1s;
+}
+
+@keyframes slideUp7 {
+    from {
+        right: -53%;
+    }
+
+    to {
+        right: -26.5%;
+    }
+}
+
+.trg-8 {
+    /* Треугольник 8 */
+    position: absolute;
+    width: 700px;
+    height: 470px;
+    left: auto;
+    right: -31.2%;
+    top: 145px;
+    bottom: auto;
+    transform: rotate(90deg);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background-color: #009845;
+    z-index: -1;
+}
+
+.animate-up-8 {
+    animation: slideUp8 1s ease forwards;
+    animation-delay: 0.7s;
+}
+
+@keyframes slideUp8 {
+    from {
+        right: -62.4%;
+    }
+
+    to {
+        right: -31.2%;
+    }
+}
+
+.trg-9 {
+    /* Треугольник 9 */
+    position: absolute;
+    width: 520px;
+    height: 340px;
+    left: auto;
+    right: -29.2%;
+    top: 50px;
+    bottom: auto;
+    transform: rotate(-90deg);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform: rotate(90deg);
+    overflow: hidden;
+    background-color: #BF0312;
+    opacity: .98;
+}
+
+.animate-up-9 {
+    animation: slideUp9 1s ease forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes slideUp9 {
+    from {
+        right: -58.4%;
+    }
+
+    to {
+        right: -29.2%;
+    }
+}
+
+.trg-10 {
+    /* Треугольник 10 */
+    position: absolute;
+    width: 750px;
+    height: 320px;
+    left: auto;
+    right: 0;
+    top: -17.5px;
+    bottom: auto;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    overflow: hidden;
+    background-color: #01B18B;
+    z-index: -1;
+}
+
+.animate-up-10 {
+    animation: slideUp10 1s ease forwards;
+    animation-delay: 1.1s;
+}
+
+@keyframes slideUp10 {
+    from {
+        top: -327.5px;
+    }
+
+    to {
+        top: -17.5px;
+    }
+}
+
+.trg-11 {
+    /* Треугольник 11 */
+    position: absolute;
+    width: 800px;
+    height: 350px;
+    left: auto;
+    right: 15%;
+    top: -17.5px;
+    bottom: auto;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    overflow: hidden;
+    background-color: #0F48ED;
+}
+
+.trg-11 .text-left {
+    position: absolute;
+    transform: rotate(-48deg);
+    font-size: 45px;
+    right: 65%;
+    top: 25%;
+    color: white;
+    writing-mode: vertical-rl;
+}
+
+.trg-11 .text-right {
+    position: absolute;
+    transform: rotate(-132deg);
+    left: 65%;
+    top: 25%;
+    font-size: 45px;
+    color: white;
+    writing-mode: vertical-rl;
+}
+
+.animate-up-11 {
+    animation: slideUp11 1s ease forwards;
+    animation-delay: 0.9s;
+}
+
+@keyframes slideUp11 {
+    from {
+        top: -367.5px;
+    }
+
+    to {
+        top: -17.5px;
+    }
+}
+
+.trg-12 {
+    /* Треугольник 12 */
+    position: absolute;
+    width: 500px;
+    height: 220px;
+    left: auto;
+    right: 27%;
+    top: -17.5px;
+    bottom: auto;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    overflow: hidden;
+    background-color: #B3A401;
+    z-index: 2;
+}
+
+.animate-up-12 {
+    animation: slideUp12 1s ease forwards;
+    animation-delay: 0.7s;
+}
+
+@keyframes slideUp12 {
+    from {
+        top: -237.5px;
+    }
+
+    to {
+        top: -17.5px;
+    }
+}
+
+.trg-13 {
+    /* Треугольник 13 */
+    position: absolute;
+    width: 700px;
+    height: 300px;
+    left: auto;
+    right: 40%;
+    top: -17.5px;
+    bottom: auto;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    overflow: hidden;
+    background-color: #009A09;
+    z-index: -1;
+}
+
+.animate-up-13 {
+    animation: slideUp13 1s ease forwards;
+    animation-delay: 0.7s;
+}
+
+@keyframes slideUp13 {
+    from {
+        top: -317.5px;
+    }
+
+    to {
+        top: -17.5px;
+    }
+}
+
+.trg-14 {
+    /* Треугольник 14 */
+    position: absolute;
+    width: 640px;
+    height: 280px;
+    left: auto;
+    right: 50%;
+    top: -17.5px;
+    bottom: auto;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    overflow: hidden;
+    background-color: #82288A;
+    z-index: -2;
+}
+
+.animate-up-14 {
+    animation: slideUp14 1s ease forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes slideUp14 {
+    from {
+        top: -297.5px;
+    }
+
+    to {
+        top: -17.5px;
+    }
+}
+
+.trg-15 {
+    /* Треугольник 15 */
+    position: absolute;
+    width: 760px;
+    height: 485px;
+    left: -33%;
+    right: auto;
+    top: 45%;
+    bottom: auto;
+    transform: rotate(-90deg);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background-color: #01Ab86;
+    z-index: -2;
+}
+
+.animate-up-15 {
+    animation: slideUp15 1s ease forwards;
+    animation-delay: 0.8s;
+}
+
+@keyframes slideUp15 {
+    from {
+        left: -66%;
+    }
+
+    to {
+        left: -33%;
+    }
+}
+
+.trg-16 {
+    /* Треугольник 16 */
+    position: absolute;
+    width: 770px;
+    height: 515px;
+    left: -32.1%;
+    right: auto;
+    top: 100px;
+    bottom: auto;
+    transform: rotate(-90deg);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background-color: #C13200;
+    z-index: -1;
+}
+
+.animate-up-16 {
+    animation: slideUp16 1s ease forwards;
+    animation-delay: 0.6s;
+}
+
+@keyframes slideUp16 {
+    from {
+        left: -64.2%;
+    }
+
+    to {
+        left: -32.1%;
+    }
+}
+
+.trg-17 {
+    /* Треугольник 17 */
+    position: absolute;
+    width: 780px;
+    height: 530px;
+    left: -32%;
+    right: auto;
+    top: 200px;
+    bottom: auto;
+    transform: rotate(-90deg);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background-color: #5F00E4;
+}
+
+.animate-up-17 {
+    animation: slideUp17 1s ease forwards;
+}
+
+@keyframes slideUp17 {
+    from {
+        left: -64%;
+    }
+
+    to {
+        left: -32%;
+    }
+}
+
+.trg-18 {
+    /* Треугольник 18 */
+    position: absolute;
+    width: 450px;
+    height: 300px;
+    left: -28%;
+    right: auto;
+    top: 300px;
+    bottom: auto;
+    transform: rotate(-90deg);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background-color: #019FA0;
+    z-index: 2;
+}
+
+.animate-up-18 {
+    animation: slideUp18 1s ease forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes slideUp18 {
+    from {
+        left: -56%;
+    }
+
+    to {
+        left: -28%;
+    }
+}
+
+.trg-19 {
+    /* Треугольник 19 */
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    left: -30%;
+    right: auto;
+    top: 450px;
+    bottom: auto;
+    transform: rotate(-90deg);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background-color: #BFAB00;
+    z-index: -1;
+}
+
+.animate-up-19 {
+    animation: slideUp19 1s ease forwards;
+    animation-delay: 0.4s;
+}
+
+@keyframes slideUp19 {
+    from {
+        left: -60%;
+    }
+
+    to {
+        left: -30%;
+    }
+}
+
+.shadow {
+    filter: drop-shadow(0px 0 50px rgba(0, 0, 0, 0.75));
+}
+
+body {
+    overflow: hidden;
+}
+
+#account {
+    display: grid;
+    place-items: center;
+    padding-top: 360px
+}
+
+.inForm {
+    width: 450px;
+    height: 250px;
+}

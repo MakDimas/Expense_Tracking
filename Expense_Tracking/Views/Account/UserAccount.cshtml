@@ -1,0 +1,60 @@
+﻿@using Expense_Tracking.Domain.ViewModel.Expense;
+@model CreateExpenseViewModel;
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "User Account";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            p {
+                font-size: 22px;
+            }
+
+            .container-sm {
+            border-radius: 5px;
+            width: 900px;
+            height: 730px;
+            margin-top: -825px;
+            margin-left: 700px;
+            }
+        </style>
+    </head>
+    <body id="accountBody">
+        @* Боковая панель *@
+		@await Html.PartialAsync("_AsidePartialView", Model)
+
+        <div class="container-sm bg-white border">
+            </br>
+            <h2 class="text-center">Welcome to Expense Tracking!</h2>
+            <h4 class="text-center">Here you can see and control all your expenses </h4>
+            </br>
+            <h4>About Expense Tracking:</h4> 
+            <p>
+                This web-site intended for control your expenses. You can add new expense clicked by button "Add Expense".
+                Next in modal window you need write expense sum and select category of expense and click "Add" button.
+            </p>
+            <p>
+                You can see all your expenses under the statistics tab. Also in statistic you can use filters. 
+                The filter provides a view expenses for selected dates or specific period.  
+            </p>
+            <p>
+                Statistic show 6 categories: Food, Fun, Clothes, Study, Medicine and Other. If you need see specific categories, 
+                you can enable or disable corresponding checkbox.
+            </p>
+            <p>
+                Also you can manage your account. For this possible you need select "My account" on menu bar. 
+                In "My account" you can change your email, password, phone number, day limit, name or surname.
+                If you decide to change your e-mail, you need confirm new e-mail again.
+                Canged day limit statistic will be calculated given the new limit.
+            </p>
+            <p>
+                Web-site have easy navigation, but if you forgot how use him, you always can back to the home page
+                clicked by "Home" button and reading this instruction again.
+            </p>
+        </div>
+	</body>
+</html>

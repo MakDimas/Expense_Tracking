@@ -1,0 +1,260 @@
+﻿@using Expense_Tracking.Domain.Enum
+@using Expense_Tracking.Domain.ViewModel.Expense;
+@using Expense_Tracking.Service.Interfaces;
+@inject IUserService _user
+@model CreateExpenseViewModel
+
+<link rel="stylesheet" href="~/css/UserAccount/AsideStyle.css" />
+<link rel="stylesheet" href="~/css/UserAccount/ModalStyle.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+@* Боковая панель *@
+<aside>
+	<nav>
+		<ul class="mcd-menu">
+			<li>
+				<div class="ExpTrc">Expense Tracking</div>
+			</li>
+			<li>
+				<a href="/Account/UserAccount">
+					<i class="fa fa-home"></i>
+					<strong>Home</strong>
+					<small>sweet home</small>
+				</a>
+			</li>
+			<li>
+				<a href="#" id="openModal">
+					<i class="fa fa-edit"></i>
+					<strong>Add Expense</strong>
+					<small>new expense</small>
+				</a>
+			</li>
+			<li>
+				<a href="/Account/Statistic">
+					<i class="fa fa-gift"></i>
+					<strong>Statistic</strong>
+					<small>your expenses</small>
+				</a>
+			</li>
+			<li>
+				<a asp-area="Identity" asp-page="/Account/Manage/Index">
+					<i class="fa fa-globe"></i>
+					<strong>My account</strong>
+					<small>options</small>
+				</a>
+			</li>
+			<li>
+				<a id="logoutButton" href="#">
+					<i class="fa fa-comments-o"></i>
+					<strong>Logout</strong>
+					<small>exit</small>
+				</a>
+			</li>
+			<li>
+				<div id="lastExpenseBlock" class="border-dark border-top border-bottom border-3">
+					<h2>Last Expense</h2>
+					<h4 id="sum">Sum: @(Model == null ? "Haven`t data" : (Model.Sum.ToString("C")))</h4>
+					<h4 id="type">Type: @(Model == null ? "Haven`t data" : (Model.ExpenseType.ToString()))</h4>
+					<h4 id="created">Date created: @(Model == null ? "Haven`t data" : (Model.Created.ToShortDateString()))</h4>
+					<h4>Time created: @(Model == null ? "Haven`t data" : (Model.Created.ToShortTimeString()))</h4>
+
+					<h2 class="border-dark border-top border-3">Money left for today</h2>
+					@{
+						var user = await _user.GetCurrentUser();
+
+						var money = ((decimal?)user?.DayLimit - (user?.Expense?.Where(x => x.Created.Date == DateTime.Today))?.Sum(x => x.Sum));
+
+					}
+					<h3 class="text-center">@(money?.ToString("C") ?? "Haven`t data")</h3>
+				</div>
+			</li>
+		</ul>
+	</nav>
+</aside>
+
+@* Модальное окно *@
+<div id="myModal" class="modal">
+	<div class="modal-content">
+		<span class="close">&times;</span>
+		<h2 class="text-center">Add Expense</h2>
+		<form method="post" asp-action="AddExpense" asp-controller="Account">
+			<div style="padding-left: 80px; width: 90%">
+				<label style="font-size: 28px; font-weight: bold">Sum:</label>
+				<input type="text" asp-for="Sum" class="form-control" />
+				<span asp-validation-for="Sum" class="text-danger" />
+			</div>
+			<br>
+			<br>
+			<div style="padding-left: 80px; width: 90%">
+				<label style="font-size: 28px; font-weight: bold">Expense type:</label>
+				@Html.DropDownListFor(model => model.ExpenseType, Html.GetEnumSelectList<ExpenseType>(), new { @class = "form-control" })
+			</div>
+			<br>
+			<br>
+			<div style="padding-left: 80px; width: 90%">
+				<label style="font-size: 28px; font-weight: bold">Created:</label>
+				<input asp-for="Created" id="currentTime" class="form-control" type="text" disabled />
+			</div>
+			<br>
+			<br>
+			<div style="display: flex; justify-content: center;">
+				<button id="addButton" type="submit" class="btn btn-primary">Add</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+@* Ф-ционал модального окна *@
+<script>
+	var modal = document.getElementById("myModal");
+	var btn = document.getElementById("openModal");
+
+	var span = document.getElementsByClassName("close")[0];
+
+	btn.onclick = function () {
+		modal.style.display = "block";
+	}
+
+	span.onclick = function () {
+		modal.style.display = "none";
+	}
+
+	window.onclick = function (event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+</script>
+
+@* Поле Create в модальном окне *@
+<script>
+	function updateCurrentTime() {
+		var currentTimeElement = document.getElementById('currentTime');
+		if (currentTimeElement) {
+			currentTimeElement.value = new Date().toLocaleTimeString();
+		}
+	}
+
+	$(function () {
+		$('#currentTime').show(function () {
+			updateCurrentTime();
+		});
+
+		setInterval(updateCurrentTime, 1000);
+	});
+</script>
+
+@* Отображение активного элемента меню *@
+<script>
+	$(document).ready(function () {
+		var url = window.location.pathname;
+		if (url == "/Identity/Account/Manage/Email" || url == "/Identity/Account/Manage/ChangePassword" || url == "/Identity/Account/Manage/PersonalData") {
+			url = "/Identity/Account/Manage";
+		}
+
+		$('nav ul.mcd-menu a[href="' + url + '"]').addClass('active');
+	});
+</script>
+
+@* Обновление данных после добавления Expense *@
+<script>
+	$(function () {
+		$('#myModal form').submit(function (e) {
+			e.preventDefault();
+			var formData = $(this).serialize();
+
+			$.ajax({
+				type: 'POST',
+				url: $(this).attr('action'),
+				data: formData,
+				success: function (response) {
+					modal.style.display = "none";
+
+					Swal.fire({
+						position: "center",
+						icon: "success",
+						title: "Your expense added",
+						showConfirmButton: false,
+						timer: 1500
+					});
+					
+					$('#lastExpenseBlock').html(response);
+
+					var createdFilter = $('#filterCreated').val();
+					var dateTime1 = $('#filterDateTime1').val();
+					var dateTime2 = $('#filterDateTime2').val();
+
+					// Отправка запроса на сервер с данными фильтрации
+					$.ajax({
+						type: 'POST',
+						url: '/Account/StatisticFilter',
+						data: {
+							'Filter.Created': createdFilter,
+							'Filter.DateTime1': dateTime1,
+							'Filter.DateTime2': dateTime2
+						},
+						success: function (response) {
+							$('#diagramTwoUpdate .diagram').html($(response).find('.diagram').html());
+							$('#expenseValue .row').html($(response).find('.row').html());
+							$('#sumPeriodValue .sumValue').html($(response).find('.sumValue').html());
+						}
+					});
+				}
+			});
+		});
+	});
+</script>
+
+@* Скрипт выхода из акканута по нажатию #logoutButton *@
+<script defer>
+	document.addEventListener('DOMContentLoaded', function () {
+		document.getElementById('logoutButton').addEventListener('click', function (event) {
+			event.preventDefault();
+			confirmLogout();
+		});
+
+		document.getElementById('logoutButton2').addEventListener('click', function (event) {
+			event.preventDefault();
+			confirmLogout();
+		});
+	});
+
+	function confirmLogout() {
+		Swal.fire({
+			title: "Are you sure?",
+			text: "Do you really want to logout?",
+			icon: "question",
+			showCancelButton: true,
+			confirmButtonColor: "#2ed12e",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, logout!"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				logoutUser();
+			}
+		});
+	}
+
+	function logoutUser() {
+		fetch('/Identity/Account/Logout', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+			},
+			redirect: 'follow'
+		}).then(response => {
+				if (response.ok) {
+					window.location.href = '/';
+				} else {
+					console.error('Logout failed.');
+				}
+			})
+			.catch(error => {
+				console.error('Error during logout:', error);
+			});
+	}
+</script>

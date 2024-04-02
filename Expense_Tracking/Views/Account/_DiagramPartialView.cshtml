@@ -1,0 +1,127 @@
+﻿@using Expense_Tracking.Domain.ViewModel.Expense;
+@using Expense_Tracking.Domain.Enum;
+@using Expense_Tracking.Domain.ViewModel._UserAccount
+@using Expense_Tracking.Service.Interfaces;
+@inject IExpenseService _expense;
+@inject IUserService _user;
+@model CreateAndFilterViewModel;
+
+<link rel="stylesheet" href="~/css/UserAccount/DiagramStyle.css" />
+<link rel="stylesheet" href="~/css/UserAccount/StatisticStyles.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@* Конвертация значений процентов для представления *@
+@{
+    var food = _expense.CalculatePercValue(Model.Results[0, 0]);
+    var fun = _expense.CalculatePercValue(Model.Results[1, 0]);
+    var clothes = _expense.CalculatePercValue(Model.Results[2, 0]);
+    var study = _expense.CalculatePercValue(Model.Results[3, 0]);
+    var medicine = _expense.CalculatePercValue(Model.Results[4, 0]);
+    var other = _expense.CalculatePercValue(Model.Results[5, 0]);
+}
+
+@* Основная диаграмма *@
+<div id="diagramTwoUpdate">
+    <div class="diagram" style="--items: 6; margin: 0 1000px; padding-top: -615.594px;">
+        <div class="item" style="--idx: 0; --perc: @food; --clr: #f1566f">
+            <label class="item2">Food: @(Model?.Results[0, 0] > 100? ">100" : Model?.Results[0, 0])%</label>
+        </div>
+        <div class="item" style="--idx: 1; --perc: @fun; --clr: #ff9650">
+            <label>Fun: @(Model?.Results[1, 0] > 100? ">100" : Model?.Results[1, 0])%</label>
+        </div>
+        <div class="item" style="--idx: 2; --perc: @clothes; --clr: #fae250">
+            <label>Clothes: @(Model?.Results[2, 0] > 100? ">100" : Model?.Results[2, 0])%</label>
+        </div>
+        <div class="item" style="--idx: 3; --perc: @study; --clr: #00bb6d">
+            <label>Study: @(Model?.Results[3, 0] > 100? ">100" : Model?.Results[3, 0])%</label>
+        </div>
+        <div class="item" style="--idx: 4; --perc: @medicine; --clr: #1b6ac6">
+            <label>Medicine: @(Model?.Results[4, 0] > 100? ">100" : Model?.Results[4, 0])%</label>
+        </div>
+        <div class="item" style="--idx: 5; --perc: @other; --clr: #8b00ff">
+            <label>Other: @(Model?.Results[5, 0] > 100? ">100" : Model?.Results[5, 0])%</label>
+        </div>
+    </div>
+</div>
+
+@* Показ потраченной суммы *@
+<div id="expenseValue">
+    <div class="expenseValues">
+        <label class="boldLabel">Your expenses for selected period:</label>
+        <br>
+        <br>
+        <div class="row">
+            <div class="items">
+                <label class="labelFantasy1">Food: </label>
+                <span>@Model?.Results[0, 1].ToString("C")</span>
+            </div>
+            <div class="items">
+                <label class="labelFantasy2">Fun: </label>
+                <span>@Model?.Results[1, 1].ToString("C")</span>
+            </div>
+            <div class="items">
+                <label class="labelFantasy3">Clothes: </label>
+                <span>@Model?.Results[2, 1].ToString("C")</span>
+            </div>
+            <div class="items">
+                <label class="labelFantasy4">Study: </label>
+                <span>@Model?.Results[3, 1].ToString("C")</span>
+            </div>
+            <div class="items">
+                <label class="labelFantasy5">Medicine: </label>
+                <span>@Model?.Results[4, 1].ToString("C")</span>
+            </div>
+            <div class="items">
+                <label class="labelFantasy6">Other: </label>
+                <span>@Model?.Results[5, 1].ToString("C")</span>
+            </div>
+        </div>
+    </div>
+
+    @{
+        var periodSum = 0.0;
+
+        if(Model != null)
+        {
+            periodSum = Enumerable.Range(0, Model.Results.GetLength(0)).Select(i => Model.Results[i, 1]).Sum();
+        }
+    }
+
+    @* Сумма за период и всё время *@
+    <div id="sumPeriodValue">
+        <div class="sumValue">
+            <label class="halfBoldLabel">* Percent values can be not ideal because they`re shrinking</label>
+            <br>
+            <br>
+            <br>
+            <label class="boldLabel">Spent money for the period: @periodSum.ToString("C")</label>
+            <br>
+            <br>
+            <label class="boldLabel">Spent money for all time: @_user.GetCurrentUser().Result?.Count</label>
+        </div>
+    </div>
+</div>
+
+@* Выбор показанных элементов *@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", function () {
+                const index = Array.from(checkboxes).indexOf(checkbox);
+                const item = document.querySelector(".diagram > .item:nth-child(" + (index + 1) + ")");
+                const span = document.querySelector(".row .items:nth-child(" + (index + 1) + ")");
+
+                // Если чекбокс отмечен, показать элемент, иначе скрыть его
+                if (checkbox.checked) {
+                    item.style.display = "contents";
+                    span.style.display = "inline";
+                } else {
+                    item.style.display = "none";
+                    span.style.display = "none";
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,22 @@
+﻿@using Expense_Tracking.Domain.Entity
+@using Expense_Tracking.Domain.ViewModel.Expense
+@using Expense_Tracking.Service.Interfaces
+@inject SignInManager<User> SignInManager
+@inject IExpenseService _exp
+
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<body>
+
+    @* Боковая панель *@
+    @await Html.PartialAsync("/Views/Account/_AsidePartialView.cshtml", _exp.GetLastExpense()?.Result?.Data?.Create)
+
+    @* Верхняя панель *@
+    @await Html.PartialAsync("/Views/Account/Manage/_ManageAccountPartial.cshtml")
+
+    @* Фон шестерёнок *@
+    @await Html.PartialAsync("/Views/Account/Manage/_ManageGearPartial.cshtml")
+
+</body>

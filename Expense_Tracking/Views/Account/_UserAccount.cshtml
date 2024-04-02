@@ -1,0 +1,25 @@
+﻿@using Expense_Tracking.Domain.Entity;
+@using Expense_Tracking.Domain.ViewModel._UserAccount;
+@model UserAccountViewModel;
+
+<link rel="stylesheet" href="~/css/UserAccount/AsideStyle.css" />
+
+@* Обновление данных боковой панели *@
+<div id="lastExpenseBlock">
+    @{
+        var latestExpense = Model.User?.Expense.OrderByDescending(x => x.Created).FirstOrDefault();
+        var res1 = latestExpense != null ? latestExpense.Sum.ToString() : "Haven't data";
+        var res2 = latestExpense != null ? latestExpense.ExpenseType.ToString() : "Haven't data";
+        var res3 = latestExpense != null ? latestExpense.Created.ToShortDateString() : "Haven't data";
+        var res4 = latestExpense != null ? latestExpense.Created.ToShortTimeString() : "Haven't data";
+    }
+
+    <h2>Last Expense</h2>
+    <h4 id="sum">Sum: @res1</h4>
+    <h4 id="type">Type: @res2</h4>
+    <h4 id="created">Date created: @res3</h4>
+    <h4>Time created: @res4</h4>
+
+    <h2 class="border-dark border-top border-3">Money left for today</h2>
+    <h3 class="text-center">@Model.Money.ToString("C")</h3>
+</div>
